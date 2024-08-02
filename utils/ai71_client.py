@@ -7,4 +7,6 @@ client = AI71(AI71_API_KEY)
 
 def get_llm_response(model, messages):
     response = client.chat.completions.create(model=model, messages=messages)
-    return response
+    response_message = response.choices[0].message.content
+    strip_response_message = response_message.rsplit("User:", 1)[0].strip()
+    return strip_response_message

@@ -25,7 +25,7 @@ def research_tools_page():
             ]
             response = get_llm_response("tiiuae/falcon-180B-chat", messages)
             st.success("Research complete!")
-            st.write(response["choices"][0]["message"]["content"])
+            st.write(response)
 
     elif tool == "Financial Report Summarizer":
         st.write("Summarizing financial reports and earnings calls")
