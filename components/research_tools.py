@@ -1,6 +1,24 @@
 # components/research_tools.py
 import streamlit as st
 from utils.ai71_client import get_llm_response
+from utils.search_client import search_result
+
+
+def research_assistant(query):
+    data_input = search_result(query)
+    prompt = (
+        f"Based on the following real-time data, provide an answer for the query "
+        f"Include relevant sources and links if needed.\n\n{data_input}"
+    )
+    messages = [
+        {
+            "role": "system",
+            "content": "You are a helpful quantitative and financial research assistant.",
+        },
+        {"role": "user", "content": prompt},
+    ]
+    response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+    return response
 
 
 def research_tools_page():
@@ -16,14 +34,8 @@ def research_tools_page():
         research_query = st.text_area("Enter your research query")
         if st.button("Start Research", key="research"):
             st.info("Research assistant activated...")
-            messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": f"Research the following query: {research_query}",
-                },
-            ]
-            response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+
+            response = research_assistant(research_query)
             st.success("Research complete!")
             st.write(response)
 
