@@ -2,136 +2,113 @@ import streamlit as st
 
 
 def overview_page():
-    st.title("Home")
+    # Main Header
+    st.title("Quantitative Research Assistant")
+    st.markdown("## Empower your quantitative research with data-driven insights")
 
-    # Create a 2x2 grid layout
-    col1, col2 = st.columns(2)
+    # Introduction to the dashboard
+    st.markdown(
+        """
+        Welcome to your one-stop platform for quantitative research and analysis. 
+        Explore various tools designed to help you analyze market sentiment, optimize trading strategies, manage your portfolio, and conduct in-depth research.
+        """
+    )
+
+    # Horizontal sections with cards or boxes for each feature
+    st.markdown("---")
+    col1, col2, col3 = st.columns(3)
 
     with col1:
-        # Card for Strategy Analyzer
-        with st.container():
-            st.markdown(
-                """
-                <div style="
-                    background-color: #ffffff;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    padding: 20px;
-                    margin: 10px;
-                    text-align: center;
-                ">
-                    <h3 style="color: #0e1117;">Strategy Analyzer</h3>
-                    <p style="color: #555555;">Analyze and refine your trading strategies.</p>
-                    <a href="javascript:void(0);" onclick="window.location.href='/strategy_analyzer';" 
-                       style="
-                       display: inline-block;
-                       padding: 10px 20px;
-                       font-size: 16px;
-                       color: white;
-                       background-color: #4F8BF9;
-                       border-radius: 8px;
-                       text-decoration: none;
-                       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                       ">Go to Strategy Analyzer</a>
-                </div>
+        st.markdown(
+            """
+            <div style="
+                background-color: #f8f9fa; 
+                border-radius: 10px; 
+                padding: 20px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+                text-align: center;">
+                <h3 style="color: #0e1117;">Strategy Analyzer</h3>
+                <p>Analyze and optimize your trading strategies across different market conditions.</p>
+            </div>
             """,
-                unsafe_allow_html=True,
-            )
+            unsafe_allow_html=True,
+        )
 
     with col2:
-        # Card for Market Sentiment
-        with st.container():
-            st.markdown(
-                """
-                <div style="
-                    background-color: #ffffff;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    padding: 20px;
-                    margin: 10px;
-                    text-align: center;
-                ">
-                    <h3 style="color: #0e1117;">Market Sentiment</h3>
-                    <p style="color: #555555;">Get insights into market trends and sentiment.</p>
-                    <a href="javascript:void(0);" onclick="window.location.href='/market_sentiment';"
-                       style="
-                       display: inline-block;
-                       padding: 10px 20px;
-                       font-size: 16px;
-                       color: white;
-                       background-color: #4F8BF9;
-                       border-radius: 8px;
-                       text-decoration: none;
-                       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                       ">Go to Market Sentiment</a>
-                </div>
+        st.markdown(
+            """
+            <div style="
+                background-color: #f8f9fa; 
+                border-radius: 10px; 
+                padding: 20px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+                text-align: center;">
+                <h3 style="color: #0e1117;">Market Sentiment</h3>
+                <p>Get insights into market trends and sentiment to stay ahead of the curve.</p>
+            </div>
             """,
-                unsafe_allow_html=True,
-            )
-
-    col3, col4 = st.columns(2)
+            unsafe_allow_html=True,
+        )
 
     with col3:
-        # Card for Portfolio Management
-        with st.container():
-            st.markdown(
-                """
-                <div style="
-                    background-color: #ffffff;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    padding: 20px;
-                    margin: 10px;
-                    text-align: center;
-                ">
-                    <h3 style="color: #0e1117;">Portfolio Management</h3>
-                    <p style="color: #555555;">Manage and optimize your investment portfolio.</p>
-                    <a href="javascript:void(0);" onclick="window.location.href='/portfolio_management';"
-                       style="
-                       display: inline-block;
-                       padding: 10px 20px;
-                       font-size: 16px;
-                       color: white;
-                       background-color: #4F8BF9;
-                       border-radius: 8px;
-                       text-decoration: none;
-                       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                       ">Go to Portfolio Management</a>
-                </div>
+        st.markdown(
+            """
+            <div style="
+                background-color: #f8f9fa; 
+                border-radius: 10px; 
+                padding: 20px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+                text-align: center;">
+                <h3 style="color: #0e1117;">Portfolio Management</h3>
+                <p>Manage and optimize your investment portfolio for better returns.</p>
+            </div>
             """,
-                unsafe_allow_html=True,
-            )
+            unsafe_allow_html=True,
+        )
+
+    # Another row for more features or tools
+    st.markdown("---")
+    col4, col5, col6 = st.columns(3)
 
     with col4:
-        # Card for Research Tools
-        with st.container():
-            st.markdown(
-                """
-                <div style="
-                    background-color: #ffffff;
-                    border-radius: 12px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    padding: 20px;
-                    margin: 10px;
-                    text-align: center;
-                ">
-                    <h3 style="color: #0e1117;">Research Tools</h3>
-                    <p style="color: #555555;">Explore tools for in-depth research and analysis.</p>
-                    <a href="javascript:void(0);" onclick="window.location.href='/research_tools';"
-                       style="
-                       display: inline-block;
-                       padding: 10px 20px;
-                       font-size: 16px;
-                       color: white;
-                       background-color: #4F8BF9;
-                       border-radius: 8px;
-                       text-decoration: none;
-                       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                       ">Go to Research Tools</a>
-                </div>
+        st.markdown(
+            """
+            <div style="
+                background-color: #f8f9fa; 
+                border-radius: 10px; 
+                padding: 20px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+                text-align: center;">
+                <h3 style="color: #0e1117;">Research Tools</h3>
+                <p>Conduct in-depth research and analysis with our powerful tools.</p>
+            </div>
             """,
-                unsafe_allow_html=True,
-            )
+            unsafe_allow_html=True,
+        )
 
-    # Optional: Add some spacing at the bottom
-    st.markdown("<br>", unsafe_allow_html=True)
+    with col5:
+        st.markdown(
+            """
+            <div style="
+                background-color: #f8f9fa; 
+                border-radius: 10px; 
+                padding: 20px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+                text-align: center;">
+                <h3 style="color: #0e1117;">Coming Soon</h3>
+                <p>Stay tuned for new features and tools to enhance your trading experience.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    # Footer section or additional information
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style="text-align: center; padding: 20px;">
+            <p style="color: #0e1117;">Use the sidebar to navigate through different tools and features.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )

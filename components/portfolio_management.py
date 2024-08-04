@@ -5,11 +5,6 @@ from utils.search_client import search_result
 import json
 
 
-def rebalance(query):
-
-    return
-
-
 def portfolio_management_page():
     st.markdown(
         '<p class="stSubheader">Portfolio Management</p>', unsafe_allow_html=True
@@ -35,6 +30,37 @@ def portfolio_management_page():
                 st.session_state.portfolio[stock] = quantity
                 stock_query.append(stock)
             st.success(f"Added {quantity} shares of {stock} to portfolio")
+
+    def rebalance_portfolio(query, stock):
+        # Retrieve market data based on the query
+        data_input = search_result(query)
+
+        # Fetch stock data using the provided stock symbol
+        stock_data = get_stock_data(stock)
+
+        # Generate a prompt for a more specific rebalancing strategy
+        prompt = (
+            f"Based on the following real-time market data and specific stock information, provide a detailed and actionable rebalancing strategy for the portfolio '{st.session_state.portfolio}'. "
+            f"The portfolio currently holds {stock_data}. Provide specific buy/sell recommendations, including the percentage of the portfolio to allocate to each asset, and any other relevant details.\n\n"
+            f"Market Data:\n{data_input}\n\n"
+            f"Stock Data for {stock}:\n{stock_data}\n\n"
+            f"Consider the following factors: current asset allocation, target allocation, risk tolerance, tax implications, and market conditions. Provide specific actions with percentages for each asset."
+        )
+
+        # Structure the messages for the language model
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a financial assistant specialized in portfolio management.",
+            },
+            {"role": "user", "content": prompt},
+        ]
+
+        # Get the language model's response
+        response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+
+        # Return the rebalancing advice
+        return response
 
     def risk_assessment(query):
         data_input = search_result(query)
@@ -62,14 +88,8 @@ def portfolio_management_page():
         st.write("AI-driven portfolio monitoring and rebalancing")
         if st.button("Rebalance Portfolio", key="rebalance"):
             st.info("Portfolio rebalancing in progress...")
-            messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": f"Following is my portfolio: {st.session_state.portfolio}, rebalance this",
-                },
-            ]
-            response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+            query = str(list(st.session_state.portfolio.keys()))
+            response = rebalance_portfolio(query, stock)
             st.success("Portfolio rebalancing complete!")
             st.write(response)
 
@@ -80,7 +100,7 @@ def portfolio_management_page():
             st.info("Risk assessment initiated...")
 
             query = str(list(st.session_state.portfolio.keys()))
-            st.write(query)
+
             response = risk_assessment(query)
             st.success("Risk assessment complete!")
             st.write(response)

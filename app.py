@@ -6,7 +6,11 @@ from components.portfolio_management import portfolio_management_page
 from components.research_tools import research_tools_page
 
 # Set page config at the very beginning
-st.set_page_config(page_title="Home", layout="wide")
+st.set_page_config(page_title="Quantitative Research Assistant", layout="wide")
+
+# Initialize session state for page navigation
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
 
 # Custom CSS to improve the look and feel
 st.markdown(
@@ -43,7 +47,7 @@ st.markdown(
 )
 
 # Sidebar for navigation
-st.sidebar.title("Quantitative And Financial Research Assistant")
+st.sidebar.title("Quantitative Research Assistant")
 page = st.sidebar.radio(
     "Navigation",
     [
@@ -55,13 +59,18 @@ page = st.sidebar.radio(
     ],
 )
 
-if page == "Home":
+# Update session state for page
+if page != st.session_state.page:
+    st.session_state.page = page
+
+# Display the selected page
+if st.session_state.page == "Home":
     overview_page()
-elif page == "Strategy Analyzer":
+elif st.session_state.page == "Strategy Analyzer":
     strategy_analyzer_page()
-elif page == "Market Sentiment":
+elif st.session_state.page == "Market Sentiment":
     market_sentiment_page()
-elif page == "Portfolio Management":
+elif st.session_state.page == "Portfolio Management":
     portfolio_management_page()
-elif page == "Research Tools":
+elif st.session_state.page == "Research Tools":
     research_tools_page()
