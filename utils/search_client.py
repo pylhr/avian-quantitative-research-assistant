@@ -23,7 +23,7 @@ def format_serper_response(data):
         kg = data["knowledgeGraph"]
         formatted_response.append(f"**{kg['title']}**")
         formatted_response.append(f"Type: {kg['type']}")
-        formatted_response.append(f"Website: {kg['website']}")
+        # formatted_response.append(f"Website: {kg['website']}")
         formatted_response.append(f"Description: {kg['description']}")
 
         attributes = kg.get("attributes", {})
