@@ -1,10 +1,19 @@
 import streamlit as st
 from utils.ai71_client import get_llm_response
 from utils.stock_data import get_stock_data
+from utils.search_client import search_result
+import json
+
+
+def rebalance(query):
+
+    return
 
 
 def portfolio_management_page():
-    st.markdown('<p class="stSubheader">Portfolio Management</p>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="stSubheader">Portfolio Management</p>', unsafe_allow_html=True
+    )
 
     # Initialize portfolio in session state if not already present
     if "portfolio" not in st.session_state:
@@ -15,15 +24,33 @@ def portfolio_management_page():
     # Input for stock ticker and quantity
     stock = st.text_input("Stock Ticker (e.g., AAPL)", key="stock")
     quantity = st.number_input("Quantity", min_value=0, key="quantity")
-
+    stock_query = []
     if st.button("Add to Portfolio"):
         if stock and quantity > 0:
             # Add or update the stock in the portfolio
             if stock in st.session_state.portfolio:
                 st.session_state.portfolio[stock] += quantity
+
             else:
                 st.session_state.portfolio[stock] = quantity
+                stock_query.append(stock)
             st.success(f"Added {quantity} shares of {stock} to portfolio")
+
+    def risk_assessment(query):
+        data_input = search_result(query)
+        prompt = (
+            f"Based on the following real-time data, provide an answer for the query Assess the financial risks for {st.session_state.portfolio} based upon this {get_stock_data(stock)} "
+            f"Include relevant sources and links if needed.\n\n{data_input}"
+        )
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": prompt,
+            },
+        ]
+        response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+        return response
 
     st.subheader("Your Portfolio")
     if st.session_state.portfolio:
@@ -51,14 +78,10 @@ def portfolio_management_page():
         st.write("Assessing and managing financial risks, ensuring compliance")
         if st.button("Assess Risks", key="risks"):
             st.info("Risk assessment initiated...")
-            messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": f"Assess the financial risks for {st.session_state.portfolio} based upon this {get_stock_data(stock)}",
-                },
-            ]
-            response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+
+            query = str(list(st.session_state.portfolio.keys()))
+            st.write(query)
+            response = risk_assessment(query)
             st.success("Risk assessment complete!")
             st.write(response)
 
@@ -82,4 +105,3 @@ def portfolio_management_page():
                 st.warning(f"Failed to retrieve data for {stock}")
 
         st.write(f"Total Portfolio Value: ${total_value:.2f}")
-

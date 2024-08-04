@@ -6,7 +6,7 @@ from components.portfolio_management import portfolio_management_page
 from components.research_tools import research_tools_page
 
 # Set page config at the very beginning
-st.set_page_config(page_title="Quantitative Trading Dashboard", layout="wide")
+st.set_page_config(page_title="Home", layout="wide")
 
 # Custom CSS to improve the look and feel
 st.markdown(
@@ -43,11 +43,11 @@ st.markdown(
 )
 
 # Sidebar for navigation
-st.sidebar.title("Quantitative Trading Dashboard")
+st.sidebar.title("Quantitative And Financial Research Assistant")
 page = st.sidebar.radio(
     "Navigation",
     [
-        "Overview",
+        "Home",
         "Strategy Analyzer",
         "Market Sentiment",
         "Portfolio Management",
@@ -55,7 +55,7 @@ page = st.sidebar.radio(
     ],
 )
 
-if page == "Overview":
+if page == "Home":
     overview_page()
 elif page == "Strategy Analyzer":
     strategy_analyzer_page()
