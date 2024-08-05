@@ -47,4 +47,4 @@ Avian Quantitative Research Assistant is a sophisticated tool designed for quant
 
 ## License
 
-This project is proprietary and is licensed under a custom license. See the [LICENSE](LICENSE) file for more details.
+This project is proprietary and is licensed under a custom license. See the [LICENSE](LICENSE.md) file for more details.
