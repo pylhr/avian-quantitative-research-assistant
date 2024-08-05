@@ -1,12 +1,18 @@
 import json
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SERPER_API_KEY = os.getenv("SERPER_API_KEY")
 
 
 def get_real_time_data(query):
     url = "https://google.serper.dev/search"
     payload = json.dumps({"q": query})
     headers = {
-        "X-API-KEY": "4e9d77c9cc732c4bc1c71624c5709729252fa962",
+        "X-API-KEY": SERPER_API_KEY,
         "Content-Type": "application/json",
     }
 

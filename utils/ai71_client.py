@@ -1,7 +1,10 @@
-# ai71_client.py
 from ai71 import AI71
+from dotenv import load_dotenv
+import os
 
-AI71_API_KEY = "api71-api-25b2a05e-5625-437e-bfb1-54cb9cd3fcad"
+load_dotenv()
+
+AI71_API_KEY = os.getenv("AI71_API_KEY")
 client = AI71(AI71_API_KEY)
 
 
