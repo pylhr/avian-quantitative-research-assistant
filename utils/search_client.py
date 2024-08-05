@@ -1,3 +1,4 @@
+import streamlit as st
 import json
 import requests
 from dotenv import load_dotenv
@@ -5,7 +6,7 @@ import os
 
 load_dotenv()
 
-SERPER_API_KEY = os.getenv("SERPER_API_KEY")
+SERPER_API_KEY = st.secrets["SERPER_API_KEY"]
 
 
 def get_real_time_data(query):

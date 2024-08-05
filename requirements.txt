@@ -6,4 +6,3 @@ ai71
 yfinance
 pandas-datareader
 PyPDF2
-dotenv
