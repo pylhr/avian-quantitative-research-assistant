@@ -1,4 +1,3 @@
-# components/research_tools.py
 import streamlit as st
 from utils.ai71_client import get_llm_response
 from utils.search_client import search_result
