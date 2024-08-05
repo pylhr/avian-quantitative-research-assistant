@@ -38,7 +38,7 @@ Avian Quantitative Research Assistant is a sophisticated tool designed for quant
     ```bash
     streamlit run app.py
 
-    ## Usage
+## Usage
 
 - **Strategy Analyzer:** Upload trading strategy scripts, configure market conditions, and run analyses to generate detailed reports.
 - **Market Sentiment:** Use built-in data feeds or your own inputs to analyze market sentiment and detect trends.
