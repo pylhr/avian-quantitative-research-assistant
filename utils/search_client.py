@@ -1,10 +1,11 @@
 import streamlit as st
 import json
 import requests
-from dotenv import load_dotenv
+
+# from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
 SERPER_API_KEY = st.secrets["SERPER_API_KEY"]
 

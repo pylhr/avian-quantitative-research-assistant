@@ -1,9 +1,10 @@
 import streamlit as st
 from ai71 import AI71
-from dotenv import load_dotenv
+
+# from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
 # AI71_API_KEY = os.getenv("AI71_API_KEY")
 AI71_API_KEY = st.secrets["AI71_API_KEY"]
