@@ -70,7 +70,9 @@ def research_tools_page():
             )
 
     elif tool == "Financial Report Summarizer":
-        st.write("Summarizing financial reports and earnings calls")
+        st.write(
+            "Summarizing financial reports and earnings calls or any dossier you need help with."
+        )
         uploaded_file = st.file_uploader("Upload financial report", type="pdf")
         if uploaded_file is not None and st.button("Summarize Report", key="summarize"):
             st.info("Report summarization started...")
