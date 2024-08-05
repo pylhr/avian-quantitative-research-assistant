@@ -108,6 +108,8 @@ def overview_page():
         """
         <div style="text-align: center; padding: 20px;">
             <p style="color: #0e1117;">Use the sidebar to navigate through different tools and features.</p>
+            <p>Developed by <a href="https://pylhr.vercel.app/" target="_blank">PYLHR</a> &copy <a href="https://www.linkedin.com/in/pylhr" target="_blank">Priyanshu Lohar</a> </p>
+            
         </div>
         """,
         unsafe_allow_html=True,
