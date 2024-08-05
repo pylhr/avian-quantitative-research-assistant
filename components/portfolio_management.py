@@ -91,7 +91,10 @@ def portfolio_management_page():
             query = str(list(st.session_state.portfolio.keys()))
             response = rebalance_portfolio(query, stock)
             st.success("Portfolio rebalancing complete!")
-            st.write(response)
+            # st.write(response)
+            st.markdown(
+                f"<p style='font-size:16px;'>{response}</p>", unsafe_allow_html=True
+            )
 
     with col2:
         st.subheader("Risk Management")
@@ -103,7 +106,10 @@ def portfolio_management_page():
 
             response = risk_assessment(query)
             st.success("Risk assessment complete!")
-            st.write(response)
+            # st.write(response)
+            st.markdown(
+                f"<p style='font-size:16px;'>{response}</p>", unsafe_allow_html=True
+            )
 
     st.subheader("Real-time Portfolio Value and Stock Data")
     if st.session_state.portfolio:

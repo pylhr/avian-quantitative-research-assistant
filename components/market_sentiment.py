@@ -36,4 +36,7 @@ def market_sentiment_page():
 
         response = sentiment_analysis(ticker)
         st.success("Sentiment analysis complete!")
-        st.write(response)
+        # st.write(response)
+        st.markdown(
+            f"<p style='font-size:16px;'>{response}</p>", unsafe_allow_html=True
+        )

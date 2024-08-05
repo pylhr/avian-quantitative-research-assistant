@@ -2,6 +2,33 @@
 import streamlit as st
 from utils.ai71_client import get_llm_response
 from utils.search_client import search_result
+import PyPDF2
+
+
+def extract_text_from_pdf(pdf_file):
+    reader = PyPDF2.PdfReader(pdf_file)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
+    return text
+
+
+def chunk_text(text, chunk_size=1000):
+    # Splits the text into chunks of specified size
+    for i in range(0, len(text), chunk_size):
+        yield text[i : i + chunk_size]
+
+
+def summarize_chunk(chunk, model):
+    messages = [
+        {
+            "role": "system",
+            "content": "You are a knowledgeable quantitative and finance research assistant.",
+        },
+        {"role": "user", "content": f"Summarize the following text: {chunk}"},
+    ]
+    response = get_llm_response(model, messages)
+    return response
 
 
 def research_assistant(query):
@@ -37,24 +64,27 @@ def research_tools_page():
 
             response = research_assistant(research_query)
             st.success("Research complete!")
-            st.write(response)
+            # st.write(response)
+            st.markdown(
+                f"<p style='font-size:16px;'>{response}</p>", unsafe_allow_html=True
+            )
 
     elif tool == "Financial Report Summarizer":
         st.write("Summarizing financial reports and earnings calls")
         uploaded_file = st.file_uploader("Upload financial report", type="pdf")
         if uploaded_file is not None and st.button("Summarize Report", key="summarize"):
             st.info("Report summarization started...")
-            # Assuming the content of the file is extracted and sent directly
-            file_content = uploaded_file.read().decode(
-                "utf-8"
-            )  # Assuming text-based PDF for simplicity
-            messages = [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": f"Summarize the following financial report: {file_content}",
-                },
-            ]
-            response = get_llm_response("tiiuae/falcon-180B-chat", messages)
+            file_content = extract_text_from_pdf(uploaded_file)
+
+            summarized_chunks = []
+            chunk_size = 1000  # Adjust chunk size based on model and API limits
+            for i, chunk in enumerate(chunk_text(file_content, chunk_size)):
+                summary = summarize_chunk(chunk, "tiiuae/falcon-180B-chat")
+                # st.markdown(f"### Summary of Chunk {i + 1}")
+                st.markdown(
+                    f"<p style='font-size:16px;'>{summary}</p>", unsafe_allow_html=True
+                )
             st.success("Summarization complete!")
-            st.write(response)
+            # final_summary = " ".join(summarized_chunks)
+            # st.success("Summarization complete!")
+        # st.write(final_summary)

@@ -5,3 +5,4 @@ plotly
 ai71
 yfinance
 pandas-datareader
+PyPDF2
