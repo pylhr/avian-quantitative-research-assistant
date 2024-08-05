@@ -6,7 +6,7 @@ from components.portfolio_management import portfolio_management_page
 from components.research_tools import research_tools_page
 
 # Set page config at the very beginning
-st.set_page_config(page_title="Quantitative Research Assistant", layout="wide")
+st.set_page_config(page_title="Avian Quantitative Research Assistant", layout="wide")
 
 # Initialize session state for page navigation
 if "page" not in st.session_state:
@@ -47,7 +47,7 @@ st.markdown(
 )
 
 # Sidebar for navigation
-st.sidebar.title("Quantitative Research Assistant")
+st.sidebar.title("Avian Quantitative Research Assistant")
 page = st.sidebar.radio(
     "Navigation",
     [

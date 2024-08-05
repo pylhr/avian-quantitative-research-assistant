@@ -3,7 +3,7 @@ import streamlit as st
 
 def overview_page():
     # Main Header
-    st.title("Quantitative Research Assistant")
+    st.title("Avian Quantitative Research Assistant")
     st.markdown("## Empower your quantitative research with data-driven insights")
 
     # Introduction to the dashboard
